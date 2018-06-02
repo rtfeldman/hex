@@ -207,7 +207,7 @@ all =
                 [ fuzz3 (intRange 0 9) (intRange 0 9) (intRange 0 9) "numbers work" <|
                     \first second third ->
                         [ first, second, third ]
-                            |> List.map toString
+                            |> List.map String.fromInt
                             |> String.join ""
                             |> Hex.fromString
                             |> Expect.equal (Ok ((first * 256) + (second * 16) + third))
@@ -216,7 +216,7 @@ all =
                 [ fuzz3 (intRange 0 9) (intRange 0 9) (intRange 0 9) "numbers work" <|
                     \first second third ->
                         [ first, second, third ]
-                            |> List.map toString
+                            |> List.map String.fromInt
                             |> String.join ""
                             |> (++) "-"
                             |> Hex.fromString
@@ -233,4 +233,4 @@ expectErr val =
             Expect.pass
 
         Ok okVal ->
-            Expect.fail ("Expected an Err but got " ++ toString val)
+            Expect.fail ("Expected an Err but got " ++ Debug.toString val)
